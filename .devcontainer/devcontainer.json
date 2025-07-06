@@ -32,9 +32,7 @@
     },
     "5000": {
       "label": "Backend (Node.js)",
-      "onAutoForward": "notify",
-      "protocol": "http",
-      "requireLocalPort": false
+      "onAutoForward": "notify"
     }
   },
 
