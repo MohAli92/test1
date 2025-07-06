@@ -32,9 +32,7 @@
     },
     "5000": {
       "label": "Backend (Node.js)",
-      "onAutoForward": "openBrowser",
-      "protocol": "http",
-      "requireLocalPort": false
+      "onAutoForward": "notify"
     }
   },
 
@@ -44,23 +42,5 @@
   
   "mounts": [
     "source=${localWorkspaceFolder}/.devcontainer/node_modules,target=/workspaces/share-dish-Anubis/node_modules,type=bind,consistency=cached"
-  ],
-  
-  "appPort": [5000],
-  
-  "forwardPorts": [3000, 5000],
-  
-  "portsAttributes": {
-    "3000": {
-      "label": "Frontend (React)",
-      "onAutoForward": "notify"
-    },
-    "5000": {
-      "label": "Backend (Node.js) - Public",
-      "onAutoForward": "openBrowser",
-      "protocol": "http",
-      "requireLocalPort": false,
-      "elevateIfNeeded": true
-    }
-  }
+  ]
 } 

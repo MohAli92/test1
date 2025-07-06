@@ -162,12 +162,11 @@ function main() {
     
     if (environment === 'codespace') {
       logInfo('\n🌐 Codespace detected!');
-      logInfo('- The API will be available on port 5000 (PUBLIC)');
+      logInfo('- The API will be available on port 5000');
       logInfo('- The frontend will be available on port 3000');
       logInfo('- API URL will be auto-detected from your codespace URL');
       logInfo('- No need to manually configure REACT_APP_API_URL');
       logInfo('- The app will automatically find the correct backend URL');
-      logInfo('- Port 5000 is automatically exposed and public');
     } else {
       logInfo('\n💻 Local environment detected!');
       logInfo('- The API will be available on http://localhost:5000');
