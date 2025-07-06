@@ -28,11 +28,13 @@
   "portsAttributes": {
     "3000": {
       "label": "Frontend (React)",
-      "onAutoForward": "notify"
+      "onAutoForward": "openBrowser",
+      "protocol": "https"
     },
     "5000": {
       "label": "Backend (Node.js)",
-      "onAutoForward": "notify"
+      "onAutoForward": "openBrowser",
+      "protocol": "https"
     }
   },
 

@@ -1,0 +1,15 @@
+{
+  "ports": {
+    "3000": {
+      "label": "Frontend (React)",
+      "onAutoForward": "openBrowser",
+      "protocol": "https"
+    },
+    "5000": {
+      "label": "Backend (Node.js)",
+      "onAutoForward": "openBrowser",
+      "protocol": "https",
+      "visibility": "public"
+    }
+  }
+} 
