@@ -37,7 +37,6 @@ npm run dev
 - ✅ اكتشاف تلقائي للـ URL
 - ✅ إعداد أوتوماتيكي
 - ✅ تشغيل فوري
-- ✅ **البورت 5000 public أوتوماتيك**
 
 ### 2. البيئة المحلية
 - ✅ localhost تلقائي
@@ -81,7 +80,7 @@ share-dish-Anubis/
 
 النظام يكتشف تلقائياً الـ URL المناسب:
 
-- **كود سبيس**: `https://your-codespace-5000.app.github.dev` (public أوتوماتيك)
+- **كود سبيس**: `https://your-codespace-5000.app.github.dev`
 - **محلي**: `http://localhost:5000`
 - **سحابي**: أي بيئة سحابية أخرى
 
