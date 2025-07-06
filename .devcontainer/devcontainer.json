@@ -7,8 +7,6 @@
     "ghcr.io/devcontainers/features/github-cli:1": {}
   },
 
-  "initializeCommand": "git config --global user.name \"${localEnv:GITHUB_USER:-GitHub User}\" && git config --global user.email \"${localEnv:GITHUB_EMAIL:-user@example.com}\"",
-
   "customizations": {
     "vscode": {
       "extensions": [
