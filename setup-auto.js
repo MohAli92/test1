@@ -137,6 +137,17 @@ function installDependencies() {
     logSuccess('All dependencies installed successfully');
   } catch (error) {
     logError(`Failed to install dependencies: ${error.message}`);
+    
+    // If it's a private repository issue, provide helpful guidance
+    if (error.message.includes('401') || error.message.includes('403') || error.message.includes('private')) {
+      logWarning('This might be a private repository access issue.');
+      logInfo('Solutions:');
+      logInfo('1. Make sure you have access to the repository');
+      logInfo('2. Check if you need to authenticate with GitHub');
+      logInfo('3. Try running: git config --global user.name "Your Name"');
+      logInfo('4. Try running: git config --global user.email "your.email@example.com"');
+    }
+    
     throw error;
   }
 }
@@ -146,6 +157,16 @@ function main() {
   try {
     const environment = detectEnvironment();
     logInfo(`Detected environment: ${environment}`);
+    
+    // Check if this is a private repository
+    const isPrivateRepo = process.env.GITHUB_REPOSITORY && 
+                         process.env.GITHUB_REPOSITORY.includes('/') &&
+                         !process.env.GITHUB_REPOSITORY.includes('public');
+    
+    if (isPrivateRepo) {
+      logInfo('🔒 Private repository detected');
+      logInfo('Setting up for private repository access...');
+    }
     
     // Create .env files
     createServerEnv();
@@ -167,11 +188,19 @@ function main() {
       logInfo('- API URL will be auto-detected from your codespace URL');
       logInfo('- No need to manually configure REACT_APP_API_URL');
       logInfo('- The app will automatically find the correct backend URL');
+      
+      if (isPrivateRepo) {
+        logInfo('- ✅ Private repository access configured');
+      }
     } else {
       logInfo('\n💻 Local environment detected!');
       logInfo('- The API will be available on http://localhost:5000');
       logInfo('- The frontend will be available on http://localhost:3000');
       logInfo('- No manual configuration needed');
+      
+      if (isPrivateRepo) {
+        logInfo('- ✅ Private repository access configured');
+      }
     }
     
     logInfo('\n🚀 Ready to run: npm start');
