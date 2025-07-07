@@ -98,23 +98,23 @@ function createClientEnv() {
   
   const envPath = path.join(__dirname, 'client', '.env');
   
-  // Don't create client .env file at all - let the app auto-detect
-  // This ensures no manual URL configuration is needed
-  if (fs.existsSync(envPath)) {
-    logInfo('Client .env file already exists, checking if it has manual URL...');
-    
-    // Read existing file and check if it has REACT_APP_API_URL
-    const existingContent = fs.readFileSync(envPath, 'utf8');
-    if (existingContent.includes('REACT_APP_API_URL=')) {
-      logWarning('Found REACT_APP_API_URL in existing .env file');
-      logInfo('The app will use auto-detection instead of manual URL');
-    }
-    return;
+  // Create client .env file with auto-detection enabled
+  const envContent = `# Auto-detection enabled - no manual configuration needed
+# The app will automatically detect the correct API URL
+# REACT_APP_API_URL= (leave empty for auto-detection)
+
+# Optional: Override auto-detection by uncommenting and setting the URL below
+# REACT_APP_API_URL=https://your-custom-api-url.com
+`;
+
+  try {
+    fs.writeFileSync(envPath, envContent);
+    logSuccess('Client .env file created with auto-detection enabled');
+    logInfo('No manual URL configuration needed - auto-detection will work');
+  } catch (error) {
+    logError(`Failed to create client .env: ${error.message}`);
+    throw error;
   }
-  
-  // Don't create .env file at all - let React use default behavior
-  logInfo('No client .env file needed - auto-detection will work without it');
-  logSuccess('Client auto-detection enabled (no .env file created)');
 }
 
 // Install dependencies
