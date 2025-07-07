@@ -98,19 +98,23 @@ function createClientEnv() {
   
   const envPath = path.join(__dirname, 'client', '.env');
   
-  // For codespaces, we'll leave it empty to use auto-detection
-  // For local development, also leave it empty
-  const envContent = `# API URL - Leave empty for auto-detection
-# REACT_APP_API_URL=
-`;
-
-  try {
-    fs.writeFileSync(envPath, envContent);
-    logSuccess('Client .env file created successfully');
-  } catch (error) {
-    logError(`Failed to create client .env: ${error.message}`);
-    throw error;
+  // Don't create client .env file at all - let the app auto-detect
+  // This ensures no manual URL configuration is needed
+  if (fs.existsSync(envPath)) {
+    logInfo('Client .env file already exists, checking if it has manual URL...');
+    
+    // Read existing file and check if it has REACT_APP_API_URL
+    const existingContent = fs.readFileSync(envPath, 'utf8');
+    if (existingContent.includes('REACT_APP_API_URL=')) {
+      logWarning('Found REACT_APP_API_URL in existing .env file');
+      logInfo('The app will use auto-detection instead of manual URL');
+    }
+    return;
   }
+  
+  // Don't create .env file at all - let React use default behavior
+  logInfo('No client .env file needed - auto-detection will work without it');
+  logSuccess('Client auto-detection enabled (no .env file created)');
 }
 
 // Install dependencies
@@ -154,14 +158,23 @@ function main() {
     logInfo('\nNext steps:');
     logInfo('1. Run "npm start" to start the development server');
     logInfo('2. The application will automatically detect your environment');
-    logInfo('3. For codespaces, the API URL will be auto-detected');
+    logInfo('3. NO manual URL configuration needed!');
     
     if (environment === 'codespace') {
       logInfo('\n🌐 Codespace detected!');
       logInfo('- The API will be available on port 5000');
       logInfo('- The frontend will be available on port 3000');
-      logInfo('- URLs will be automatically detected');
+      logInfo('- API URL will be auto-detected from your codespace URL');
+      logInfo('- No need to manually configure REACT_APP_API_URL');
+      logInfo('- The app will automatically find the correct backend URL');
+    } else {
+      logInfo('\n💻 Local environment detected!');
+      logInfo('- The API will be available on http://localhost:5000');
+      logInfo('- The frontend will be available on http://localhost:3000');
+      logInfo('- No manual configuration needed');
     }
+    
+    logInfo('\n🚀 Ready to run: npm start');
     
   } catch (error) {
     logError(`\n💥 Setup failed: ${error.message}`);

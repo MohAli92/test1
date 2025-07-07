@@ -8,30 +8,63 @@ const getApiUrl = () => {
   console.log('- Origin:', window.location.origin);
   console.log('- REACT_APP_API_URL:', process.env.REACT_APP_API_URL);
   
-  // If REACT_APP_API_URL is set, use it
-  if (process.env.REACT_APP_API_URL && process.env.REACT_APP_API_URL.trim() !== '') {
+  // If REACT_APP_API_URL is set and not empty, use it
+  if (process.env.REACT_APP_API_URL && process.env.REACT_APP_API_URL.trim() !== '' && process.env.REACT_APP_API_URL !== 'undefined') {
     console.log('✅ Using REACT_APP_API_URL:', process.env.REACT_APP_API_URL);
     return process.env.REACT_APP_API_URL;
   }
   
-  // Check if we're in GitHub Codespaces
-  if (window.location.hostname.includes('github.dev')) {
-    // Extract the codespace URL and replace port 3000 with 5000
-    const currentUrl = window.location.origin;
-    const codespaceUrl = currentUrl.replace(':3000', ':5000');
-    console.log('✅ Detected GitHub Codespaces');
-    console.log('- Current URL:', currentUrl);
-    console.log('- API URL:', codespaceUrl);
-    return codespaceUrl;
-  }
+  console.log('ℹ️ REACT_APP_API_URL not set or empty, using auto-detection');
   
-  // Check for other cloud environments
-  if (window.location.hostname.includes('codespaces') || 
+  // Check if we're in GitHub Codespaces or any cloud environment
+  if (window.location.hostname.includes('github.dev') || 
+      window.location.hostname.includes('codespaces') || 
       window.location.hostname.includes('gitpod') ||
-      window.location.hostname.includes('stackblitz')) {
+      window.location.hostname.includes('stackblitz') ||
+      window.location.hostname.includes('codespace') ||
+      window.location.hostname.includes('cloud') ||
+      window.location.hostname.includes('app.github.dev')) {
+    
+    // Extract the current URL and replace port 3000 with 5000
     const currentUrl = window.location.origin;
-    const apiUrl = currentUrl.replace(':3000', ':5000');
-    console.log('✅ Detected Cloud Environment');
+    let apiUrl;
+    
+    console.log('🔍 Analyzing URL pattern:', currentUrl);
+    
+    // Handle different URL patterns for GitHub Codespaces
+    if (currentUrl.includes(':3000')) {
+      // Pattern: https://username-repo-3000.codespaces.github.dev
+      apiUrl = currentUrl.replace(':3000', ':5000');
+    } else if (currentUrl.includes('-3000-')) {
+      // Pattern: https://username-repo-3000-codespaces.github.dev
+      apiUrl = currentUrl.replace('-3000-', '-5000-');
+    } else if (currentUrl.includes('-3000.')) {
+      // Pattern: https://username-repo-3000.codespaces.github.dev
+      apiUrl = currentUrl.replace('-3000.', '-5000.');
+    } else if (currentUrl.includes('3000-')) {
+      // Pattern: https://3000-username-repo.codespaces.github.dev
+      apiUrl = currentUrl.replace('3000-', '5000-');
+    } else if (currentUrl.includes('.3000.')) {
+      // Pattern: https://username.3000.codespaces.github.dev
+      apiUrl = currentUrl.replace('.3000.', '.5000.');
+    } else {
+      // Try to construct the API URL by replacing any occurrence of 3000 with 5000
+      apiUrl = currentUrl.replace(/3000/g, '5000');
+      
+      // Special handling for Gitpod and StackBlitz
+      if (currentUrl.includes('gitpod.io')) {
+        // For Gitpod, we need to use the workspace URL with port 5000
+        apiUrl = currentUrl.replace('3000', '5000');
+        if (!apiUrl.includes(':5000')) {
+          apiUrl = currentUrl + ':5000';
+        }
+      } else if (currentUrl.includes('stackblitz.com')) {
+        // For StackBlitz, we need to use a different approach
+        apiUrl = currentUrl.replace('3000', '5000');
+      }
+    }
+    
+    console.log('✅ Detected Cloud Environment (Codespaces/Gitpod/etc)');
     console.log('- Current URL:', currentUrl);
     console.log('- API URL:', apiUrl);
     return apiUrl;
