@@ -122,7 +122,7 @@ const AddPost: React.FC = () => {
     }
   };
 
-  // دعم السحب والإفلات
+  // Drag and drop support
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -183,7 +183,7 @@ const AddPost: React.FC = () => {
 
         <form onSubmit={handleSubmit}>
           <Stack spacing={3}>
-            {/* Photo Upload مع دعم السحب والإفلات */}
+            {/* Photo Upload with drag and drop support */}
             <Box
               sx={{
                 textAlign: 'center',

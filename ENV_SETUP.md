@@ -1,6 +1,6 @@
 # Environment Variables Setup
 
-## 📁 ملف `.env` للـ **Server** (في مجلد `server/`)
+## 📁 `.env` file for **Server** (in `server/` folder)
 
 ```env
 # MongoDB Configuration
@@ -22,52 +22,52 @@ NODE_ENV=development
 CODESPACES=false
 ```
 
-## 📁 ملف `.env` للـ **Client** (في مجلد `client/`)
+## 📁 `.env` file for **Client** (in `client/` folder)
 
 ```env
 # API URL - Leave empty for auto-detection
 # REACT_APP_API_URL=
 ```
 
-## 🔧 شرح المتغيرات
+## 🔧 Variable Explanation
 
 ### Server Variables
 
 #### **MongoDB Configuration**
-- `MONGO_URI`: رابط الاتصال بقاعدة البيانات MongoDB Atlas
-- **مطلوب:** نعم
-- **مثال:** `mongodb+srv://username:password@cluster.mongodb.net/database`
+- `MONGO_URI`: MongoDB Atlas database connection link
+- **Required:** Yes
+- **Example:** `mongodb+srv://username:password@cluster.mongodb.net/database`
 
 #### **JWT Configuration**
-- `JWT_SECRET`: مفتاح سري لتوقيع JWT tokens
-- **مطلوب:** نعم
-- **ملاحظة:** غيّر هذا في الإنتاج
+- `JWT_SECRET`: Secret key for signing JWT tokens
+- **Required:** Yes
+- **Note:** Change this in production
 
 #### **Cloudinary Configuration**
-- `CLOUDINARY_CLOUD_NAME`: اسم الحساب في Cloudinary
-- `CLOUDINARY_API_KEY`: مفتاح API
-- `CLOUDINARY_API_SECRET`: السر الخاص بـ API
-- **مطلوب:** نعم (لرفع الصور)
+- `CLOUDINARY_CLOUD_NAME`: Account name in Cloudinary
+- `CLOUDINARY_API_KEY`: API key
+- `CLOUDINARY_API_SECRET`: API secret
+- **Required:** Yes (for image uploads)
 
 #### **Server Configuration**
-- `PORT`: البورت الذي يعمل عليه الـ server
-- `NODE_ENV`: بيئة التشغيل (development/production)
-- **مطلوب:** لا (قيم افتراضية)
+- `PORT`: Port on which the server runs
+- `NODE_ENV`: Operating environment (development/production)
+- **Required:** No (default values)
 
 #### **CodeSpaces Configuration**
-- `CODESPACES`: هل يعمل على GitHub CodeSpaces
-- **مطلوب:** لا
-- **قيم:** true/false
+- `CODESPACES`: Whether running on GitHub CodeSpaces
+- **Required:** No
+- **Values:** true/false
 
 ### Client Variables
 
 #### **API Configuration**
-- `REACT_APP_API_URL`: عنوان الـ API (اختياري)
-- **ملاحظة:** إذا تركته فارغ، سيتم الاكتشاف التلقائي
+- `REACT_APP_API_URL`: API address (optional)
+- **Note:** If left empty, automatic detection will be used
 
-## 🚀 كيفية الإعداد
+## 🚀 How to Setup
 
-### 1. للبيئة المحلية (Local Development)
+### 1. For Local Environment (Local Development)
 ```env
 # Server
 MONGO_URI=mongodb://localhost:27017/share-dish
@@ -77,10 +77,10 @@ NODE_ENV=development
 CODESPACES=false
 
 # Client
-# REACT_APP_API_URL= (اتركه فارغ للاكتشاف التلقائي)
+# REACT_APP_API_URL= (leave empty for automatic detection)
 ```
 
-### 2. للبيئة السحابية (Cloud/CodeSpaces)
+### 2. For Cloud Environment (Cloud/CodeSpaces)
 ```env
 # Server
 MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/database
@@ -93,7 +93,7 @@ CODESPACES=true
 REACT_APP_API_URL=https://your-codespace-url-5000.app.github.dev
 ```
 
-### 3. للإنتاج (Production)
+### 3. For Production
 ```env
 # Server
 MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/database
@@ -106,23 +106,23 @@ CODESPACES=false
 REACT_APP_API_URL=https://your-production-api.com
 ```
 
-## 🔒 ملاحظات الأمان
+## 🔒 Security Notes
 
-1. **لا تشارك ملفات `.env`** في Git
-2. **غيّر JWT_SECRET** في الإنتاج
-3. **استخدم كلمات مرور قوية** لقاعدة البيانات
-4. **احمِ مفاتيح Cloudinary** API
+1. **Don't share `.env` files** in Git
+2. **Change JWT_SECRET** in production
+3. **Use strong passwords** for the database
+4. **Protect Cloudinary** API keys
 
-## 🐛 استكشاف الأخطاء
+## 🐛 Troubleshooting
 
-### إذا لم يعمل الاتصال بقاعدة البيانات:
-- تحقق من `MONGO_URI`
-- تأكد من أن IP مسموح في MongoDB Atlas
+### If database connection doesn't work:
+- Check `MONGO_URI`
+- Make sure IP is allowed in MongoDB Atlas
 
-### إذا لم تعمل المصادقة:
-- تحقق من `JWT_SECRET`
-- تأكد من أن الـ token يتم إرساله
+### If authentication doesn't work:
+- Check `JWT_SECRET`
+- Make sure the token is being sent
 
-### إذا لم تعمل رفع الصور:
-- تحقق من إعدادات Cloudinary
-- تأكد من صحة API keys 
+### If image upload doesn't work:
+- Check Cloudinary settings
+- Make sure API keys are correct 

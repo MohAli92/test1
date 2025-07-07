@@ -17,12 +17,12 @@ router.post('/upload', auth, upload.single('image'), async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: 'No image file provided' });
     }
-    // رفع الصورة إلى Cloudinary
+    // Upload image to Cloudinary
     const result = await cloudinary.uploader.upload(req.file.path, {
       folder: 'share-dish',
       resource_type: 'image',
     });
-    // حذف الصورة من التخزين المؤقت بعد الرفع
+    // Delete image from temporary storage after upload
     fs.unlinkSync(req.file.path);
     res.json({ url: result.secure_url });
   } catch (err) {

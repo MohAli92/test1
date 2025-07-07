@@ -1,28 +1,28 @@
 # Universal CodeSpaces Setup
 
-## 🎯 النظام العمومي لأي كودسبيس
+## 🎯 Universal System for Any Codespace
 
-النظام الآن مصمم ليعمل تلقائياً على أي كودسبيس بدون الحاجة لتعديل أي إعدادات!
+The system is now designed to work automatically on any codespace without the need to modify any settings!
 
-## 🔧 كيف يعمل
+## 🔧 How It Works
 
-### 1. **اكتشاف تلقائي للبيئة**
+### 1. **Automatic Environment Detection**
 ```javascript
-// يكتشف تلقائياً إذا كان يعمل على:
+// Automatically detects if running on:
 - GitHub Codespaces (github.dev)
 - Gitpod
 - StackBlitz
-- أي بيئة سحابية أخرى
-- البيئة المحلية (localhost)
+- Any other cloud environment
+- Local environment (localhost)
 ```
 
-### 2. **تحويل تلقائي للعنوان**
+### 2. **Automatic URL Conversion**
 ```javascript
-// من: https://fluffy-doodle-699gw4qj7ww4crwp9-3000.app.github.dev
-// إلى: https://fluffy-doodle-699gw4qj7ww4crwp9-5000.app.github.dev
+// From: https://fluffy-doodle-699gw4qj7ww4crwp9-3000.app.github.dev
+// To: https://fluffy-doodle-699gw4qj7ww4crwp9-5000.app.github.dev
 ```
 
-## 📁 ملفات `.env` المطلوبة
+## 📁 Required `.env` Files
 
 ### **server/.env**
 ```env
@@ -49,18 +49,18 @@ CODESPACES=true
 REACT_APP_API_URL=
 ```
 
-## 🚀 كيفية التشغيل
+## 🚀 How to Run
 
-### 1. **في أي كودسبيس جديد:**
+### 1. **In any new codespace:**
 ```bash
-# 1. Clone المشروع
+# 1. Clone the project
 git clone <repository-url>
 
 # 2. Install dependencies
 cd server && npm install
 cd ../client && npm install
 
-# 3. شغل المشروع
+# 3. Run the project
 # Terminal 1 - Server
 cd server && npm run dev
 
@@ -68,14 +68,14 @@ cd server && npm run dev
 cd client && npm start
 ```
 
-### 2. **النظام هيشتغل تلقائياً:**
-- ✅ يكتشف عنوان الكودسبيس تلقائياً
-- ✅ يحول البورت من 3000 إلى 5000
-- ✅ يتصل بالـ API بدون أي إعداد إضافي
+### 2. **The system will work automatically:**
+- ✅ Automatically detects the codespace URL
+- ✅ Converts port from 3000 to 5000
+- ✅ Connects to API without any additional setup
 
 ## 🔍 Debugging
 
-### افتح Developer Tools (F12) وشوف الـ Console:
+### Open Developer Tools (F12) and check the Console:
 
 ```
 🔍 Detecting API URL...
@@ -94,36 +94,36 @@ cd client && npm start
 ✅ API Response: /api/chat/user/chats 200
 ```
 
-## 🎯 المميزات
+## 🎯 Features
 
-### ✅ **عمومي تماماً**
-- يعمل على أي كودسبيس بدون تعديل
-- يكتشف البيئة تلقائياً
-- يحول العناوين تلقائياً
+### ✅ **Completely Universal**
+- Works on any codespace without modification
+- Automatically detects the environment
+- Automatically converts URLs
 
-### ✅ **Debugging شامل**
-- رسائل واضحة في الـ console
-- تتبع كامل للـ API calls
-- معلومات مفصلة عن الأخطاء
+### ✅ **Comprehensive Debugging**
+- Clear messages in the console
+- Complete tracking of API calls
+- Detailed error information
 
-### ✅ **مرونة كاملة**
-- يمكن تجاوز الاكتشاف التلقائي
-- يعمل على البيئة المحلية
-- يدعم بيئات سحابية متعددة
+### ✅ **Complete Flexibility**
+- Can override automatic detection
+- Works on local environment
+- Supports multiple cloud environments
 
-## 🐛 استكشاف الأخطاء
+## 🐛 Troubleshooting
 
-### إذا لم يعمل الاتصال:
-1. **تحقق من الـ Console** - شوف رسائل الـ debugging
-2. **تأكد من تشغيل الـ Server** على البورت 5000
-3. **تحقق من الـ Network Tab** - شوف الـ requests
+### If the connection doesn't work:
+1. **Check the Console** - Look for debugging messages
+2. **Make sure the Server is running** on port 5000
+3. **Check the Network Tab** - Look at the requests
 
-### إذا كان العنوان خاطئ:
-1. **شوف الـ Console** - ستجد معلومات عن العنوان المكتشف
-2. **تأكد من أن البورت 5000 Public** في الكودسبيس
-3. **يمكنك تجاوز الاكتشاف** بإضافة `REACT_APP_API_URL` في `.env`
+### If the URL is wrong:
+1. **Check the Console** - You'll find information about the detected URL
+2. **Make sure port 5000 is Public** in the codespace
+3. **You can override detection** by adding `REACT_APP_API_URL` in `.env`
 
-## 🎉 النتيجة
+## 🎉 Result
 
-**النظام الآن عمومي تماماً!**  
-يعمل على أي كودسبيس بدون أي إعداد إضافي! 🚀 
+**The system is now completely universal!**  
+Works on any codespace without any additional setup! 🚀 

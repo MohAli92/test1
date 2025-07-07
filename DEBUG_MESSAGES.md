@@ -1,23 +1,23 @@
 # Debugging Messages Page
 
-## المشكلة
-صفحة Messages تعرض "Failed to load conversations. Please try again later."
+## The Problem
+Messages page shows "Failed to load conversations. Please try again later."
 
-## التغييرات المطبقة
+## Applied Changes
 
-### 1. تصحيح الـ API Endpoint
-- **قبل:** `/api/chat/user/${userId}`
-- **بعد:** `/api/chat/user/chats`
+### 1. Fix API Endpoint
+- **Before:** `/api/chat/user/${userId}`
+- **After:** `/api/chat/user/chats`
 
-### 2. إضافة Debugging
-- Console logs في `api.ts` لتتبع الـ requests والـ responses
-- Console logs في `Messages.tsx` لتتبع الـ user والـ token
-- Console logs في `fetchChats` function
+### 2. Add Debugging
+- Console logs in `api.ts` to track requests and responses
+- Console logs in `Messages.tsx` to track user and token
+- Console logs in `fetchChats` function
 
-## كيفية Debug
+## How to Debug
 
-### 1. افتح Developer Tools (F12)
-### 2. شوف الـ Console للـ logs التالية:
+### 1. Open Developer Tools (F12)
+### 2. Check the Console for the following logs:
 
 ```
 Environment Info:
@@ -35,38 +35,38 @@ Adding token to request: /api/chat/user/chats
 Fetching chats for user: ...
 ```
 
-### 3. تحقق من الـ Network Tab
-- شوف الـ request إلى `/api/chat/user/chats`
-- تحقق من الـ Authorization header
-- شوف الـ response status
+### 3. Check the Network Tab
+- Look at the request to `/api/chat/user/chats`
+- Check the Authorization header
+- Look at the response status
 
-## الأسباب المحتملة للمشكلة
+## Possible Causes of the Problem
 
-### 1. مشكلة في الـ Authentication
-- الـ token غير موجود في localStorage
-- الـ token منتهي الصلاحية
-- الـ token غير صحيح
+### 1. Authentication Problem
+- Token not found in localStorage
+- Token expired
+- Token incorrect
 
-### 2. مشكلة في الـ API URL
-- الـ API URL غير صحيح
-- الـ server لا يعمل على البورت الصحيح
+### 2. API URL Problem
+- API URL incorrect
+- Server not running on correct port
 
-### 3. مشكلة في الـ Server
-- الـ server لا يعمل
-- مشكلة في الـ database connection
-- مشكلة في الـ route handler
+### 3. Server Problem
+- Server not running
+- Database connection problem
+- Route handler problem
 
-## الحلول
+## Solutions
 
-### إذا كان الـ token غير موجود:
-1. تأكد من تسجيل الدخول
-2. تحقق من `localStorage.getItem('token')`
+### If token is missing:
+1. Make sure you're logged in
+2. Check `localStorage.getItem('token')`
 
-### إذا كان الـ API URL غير صحيح:
-1. تحقق من console.log('API URL:', API_URL)
-2. تأكد من أن الـ server يعمل على البورت الصحيح
+### If API URL is incorrect:
+1. Check console.log('API URL:', API_URL)
+2. Make sure the server is running on the correct port
 
-### إذا كان الـ server لا يستجيب:
-1. تحقق من أن الـ server يعمل
-2. تحقق من الـ database connection
-3. شوف الـ server logs 
+### If server doesn't respond:
+1. Check that the server is running
+2. Check the database connection
+3. Look at the server logs 
