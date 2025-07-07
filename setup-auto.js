@@ -154,6 +154,18 @@ function main() {
     // Install dependencies
     installDependencies();
     
+    // Make port public if in codespace
+    if (environment === 'codespace') {
+      logStep('Making port 5000 public for API access...');
+      try {
+        require('./make-public');
+        logSuccess('Port 5000 setup completed');
+      } catch (error) {
+        logWarning('Could not automatically make port public');
+        logInfo('Please manually make port 5000 public in the PORTS tab');
+      }
+    }
+    
     logSuccess('\n🎉 Setup completed successfully!');
     logInfo('\nNext steps:');
     logInfo('1. Run "npm start" to start the development server');

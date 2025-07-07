@@ -8,6 +8,7 @@
     "dev": "node setup-auto.js && concurrently \"cd server && npm run dev\" \"cd client && npm start\"",
     "install-all": "node setup-auto.js",
     "setup": "node setup-auto.js",
+    "make-public": "node make-public.js",
     "build": "cd client && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
